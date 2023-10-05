@@ -1,4 +1,5 @@
 import { Transition } from '@headlessui/react';
+import { useLogInForm, useSignUpForm } from 'features/auth';
 import ReactFocusLock from 'react-focus-lock';
 import { AiOutlineClose } from 'react-icons/ai';
 
@@ -8,6 +9,14 @@ interface Props {
 }
 
 export default function HamburgerMenu({ isOpen, handleTogleMenu }: Props) {
+  const logInForm = useLogInForm();
+  const singUpForm = useSignUpForm();
+
+  function closeMenuAndOpenModal(open: () => void) {
+    handleTogleMenu();
+    open();
+  }
+
   return (
     <ReactFocusLock>
       <Transition
@@ -30,8 +39,22 @@ export default function HamburgerMenu({ isOpen, handleTogleMenu }: Props) {
           >
             <AiOutlineClose className="h-7 w-7 " />
           </button>
-          <button type="button">sign up</button>
-          <button type="button">log in</button>
+          <button
+            type="button"
+            onClick={() => {
+              closeMenuAndOpenModal(singUpForm.open);
+            }}
+          >
+            sign up
+          </button>
+          <button
+            type="button"
+            onClick={() => {
+              closeMenuAndOpenModal(logInForm.open);
+            }}
+          >
+            log in
+          </button>
         </div>
       </Transition>
     </ReactFocusLock>

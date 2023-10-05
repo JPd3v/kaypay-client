@@ -1,9 +1,12 @@
 import HamburgerMenu from 'components/NavBar/HamburgerMenu';
+import { useLogInForm, useSignUpForm } from 'features/auth';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 export default function NavBar() {
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
+  const logInform = useLogInForm();
+  const signUpform = useSignUpForm();
 
   function handleTogleHamburgerMenu() {
     setShowHamburgerMenu((prev) => !prev);
@@ -18,7 +21,6 @@ export default function NavBar() {
         isOpen={showHamburgerMenu}
         handleTogleMenu={() => handleTogleHamburgerMenu()}
       />
-
       <button
         type="button"
         aria-label="open menu"
@@ -32,12 +34,14 @@ export default function NavBar() {
         <button
           type="button"
           className="rounded-full bg-blue-600 p-1 px-2 font-medium text-white hover:bg-blue-600"
+          onClick={logInform.open}
         >
           log in
         </button>
         <button
           type="button"
           className="rounded-full bg-blue-600 p-1 px-2 font-medium text-white hover:bg-blue-600"
+          onClick={signUpform.open}
         >
           sign up
         </button>
