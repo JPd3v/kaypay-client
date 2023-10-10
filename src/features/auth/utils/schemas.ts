@@ -41,7 +41,20 @@ const signUpSchema = z
     path: ['confirmPassword'],
   });
 
-type SignUpType = z.infer<typeof signUpSchema>;
+const logInSchema = z.object({
+  email: z
+    .string()
+    .email('Invalid email')
+    .min(1, 'Email is required')
+    .max(50, 'Email max length is 50 characters'),
+  password: z
+    .string()
+    .min(8, 'Password min length is 8 characters')
+    .max(30, 'Password max length is 30 characters'),
+});
 
-export { signUpSchema };
-export type { SignUpType };
+type SignUpType = z.infer<typeof signUpSchema>;
+type LogInType = z.infer<typeof logInSchema>;
+
+export { signUpSchema, logInSchema };
+export type { SignUpType, LogInType };
