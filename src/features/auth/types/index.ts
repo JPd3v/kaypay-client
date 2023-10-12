@@ -7,5 +7,8 @@ interface LogedUser {
   lastName: string;
 }
 
-// eslint-disable-next-line import/prefer-default-export
-export type { LogedUser };
+interface RefreshTokensResponse {
+  message: string;
+}
+
+export type { LogedUser, RefreshTokensResponse };

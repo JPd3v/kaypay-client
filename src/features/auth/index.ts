@@ -1,4 +1,6 @@
+export * from './api/getAuth';
 export * from './api/logInUser';
+export * from './api/refreshTokens';
 export * from './api/signUpUser';
 export { default as AuthModal } from './components/AuthModal';
 export { default as LogInForm } from './components/LogInForm';
