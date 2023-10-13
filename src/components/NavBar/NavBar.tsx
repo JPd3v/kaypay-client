@@ -1,5 +1,5 @@
 import HamburgerMenu from 'components/NavBar/HamburgerMenu';
-import { useLogInForm, useSignUpForm } from 'features/auth';
+import { useAuth, useLogInForm, useLogOut, useSignUpForm } from 'features/auth';
 import { useState } from 'react';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
@@ -7,6 +7,8 @@ export default function NavBar() {
   const [showHamburgerMenu, setShowHamburgerMenu] = useState(false);
   const logInform = useLogInForm();
   const signUpform = useSignUpForm();
+  const logOut = useLogOut();
+  const user = useAuth();
 
   function handleTogleHamburgerMenu() {
     setShowHamburgerMenu((prev) => !prev);
@@ -17,6 +19,7 @@ export default function NavBar() {
       <h1 className=" text-2xl font-bold text-blue-600">
         <a href="/">kaypay</a>
       </h1>
+
       <HamburgerMenu
         isOpen={showHamburgerMenu}
         handleTogleMenu={() => handleTogleHamburgerMenu()}
@@ -29,22 +32,29 @@ export default function NavBar() {
       >
         <GiHamburgerMenu className="h-5 w-5" />
       </button>
-
       <div className=" hidden gap-2 sm:flex">
-        <button
-          type="button"
-          className="rounded-full bg-blue-600 p-1 px-2 font-medium text-white hover:bg-blue-600"
-          onClick={logInform.open}
-        >
-          log in
-        </button>
-        <button
-          type="button"
-          className="rounded-full bg-blue-600 p-1 px-2 font-medium text-white hover:bg-blue-600"
-          onClick={signUpform.open}
-        >
-          sign up
-        </button>
+        {user?.data?.id ? (
+          <button type="button" onClick={() => logOut.mutate()}>
+            log out
+          </button>
+        ) : (
+          <>
+            <button
+              type="button"
+              className="rounded-full bg-blue-600 p-1 px-2 font-medium text-white hover:bg-blue-600"
+              onClick={logInform.open}
+            >
+              log in
+            </button>
+            <button
+              type="button"
+              className="rounded-full bg-blue-600 p-1 px-2 font-medium text-white hover:bg-blue-600"
+              onClick={signUpform.open}
+            >
+              sign up
+            </button>
+          </>
+        )}
       </div>
     </nav>
   );

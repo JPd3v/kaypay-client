@@ -1,5 +1,5 @@
 import { Transition } from '@headlessui/react';
-import { useLogInForm, useSignUpForm } from 'features/auth';
+import { useAuth, useLogInForm, useLogOut, useSignUpForm } from 'features/auth';
 import ReactFocusLock from 'react-focus-lock';
 import { AiOutlineClose } from 'react-icons/ai';
 
@@ -11,6 +11,8 @@ interface Props {
 export default function HamburgerMenu({ isOpen, handleTogleMenu }: Props) {
   const logInForm = useLogInForm();
   const singUpForm = useSignUpForm();
+  const user = useAuth();
+  const logOut = useLogOut();
 
   function closeMenuAndOpenModal(open: () => void) {
     handleTogleMenu();
@@ -39,22 +41,31 @@ export default function HamburgerMenu({ isOpen, handleTogleMenu }: Props) {
           >
             <AiOutlineClose className="h-7 w-7 " />
           </button>
-          <button
-            type="button"
-            onClick={() => {
-              closeMenuAndOpenModal(singUpForm.open);
-            }}
-          >
-            sign up
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              closeMenuAndOpenModal(logInForm.open);
-            }}
-          >
-            log in
-          </button>
+
+          {user.data?.id ? (
+            <button type="button" onClick={() => logOut.mutate()}>
+              log out
+            </button>
+          ) : (
+            <>
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenuAndOpenModal(singUpForm.open);
+                }}
+              >
+                sign up
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  closeMenuAndOpenModal(logInForm.open);
+                }}
+              >
+                log in
+              </button>
+            </>
+          )}
         </div>
       </Transition>
     </ReactFocusLock>
