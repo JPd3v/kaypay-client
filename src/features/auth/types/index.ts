@@ -11,4 +11,8 @@ interface RefreshTokensResponse {
   message: string;
 }
 
-export type { LogedUser, RefreshTokensResponse };
+interface LogOutResponse {
+  message: string;
+}
+
+export type { LogedUser, RefreshTokensResponse, LogOutResponse };
