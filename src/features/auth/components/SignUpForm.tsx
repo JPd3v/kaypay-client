@@ -21,7 +21,7 @@ export default function SignUpForm() {
     formState: { errors },
     setError,
   } = useForm<SignUpType>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: zodResolver(signUpSchema),
   });
 

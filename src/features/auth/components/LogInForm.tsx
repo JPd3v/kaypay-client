@@ -12,7 +12,6 @@ import { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CgSpinner } from 'react-icons/cg';
 import { isAxiosError } from 'axios';
-import { ZodIssue } from 'zod';
 
 export default function LogInForm() {
   const signUpForm = useSignUpForm();
@@ -24,7 +23,7 @@ export default function LogInForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<LogInType>({
-    mode: 'onChange',
+    mode: 'all',
     resolver: zodResolver(logInSchema),
   });
 
@@ -126,6 +125,7 @@ export default function LogInForm() {
       <button
         type="submit"
         className="mt-1 w-fit self-center rounded bg-blue-600 p-2 text-white"
+        disabled={logInUser.isLoading}
       >
         Submit
       </button>
