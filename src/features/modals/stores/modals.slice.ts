@@ -4,6 +4,7 @@ import { RootState } from 'stores/store';
 interface ModalsState {
   logInModal: boolean;
   signUpModal: boolean;
+  depositsModal: boolean;
 }
 
 interface Payload {
@@ -13,6 +14,7 @@ interface Payload {
 const initialState: ModalsState = {
   logInModal: false,
   signUpModal: false,
+  depositsModal: false,
 };
 
 const modalsSlice = createSlice({
