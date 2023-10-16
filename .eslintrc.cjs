@@ -19,6 +19,8 @@ module.exports = {
     tsconfigRootDir: __dirname,
   },
   rules: {
+    'react/prop-types': 'off',
+    'react/require-default-props': 'off',
     'react/react-in-jsx-scope': 0,
     'react-refresh/only-export-components': [
       'warn',
