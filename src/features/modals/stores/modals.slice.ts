@@ -6,6 +6,7 @@ interface ModalsState {
   signUpModal: boolean;
   depositsModal: boolean;
   transferencesModal: boolean;
+  withdrawsModal: boolean;
 }
 
 interface Payload {
@@ -17,6 +18,7 @@ const initialState: ModalsState = {
   signUpModal: false,
   depositsModal: false,
   transferencesModal: false,
+  withdrawsModal: false,
 };
 
 const modalsSlice = createSlice({
